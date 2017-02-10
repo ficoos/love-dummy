@@ -23,8 +23,8 @@ public:
 	// Implements Module.
 	virtual ModuleType getModuleType() const
 	{
-		// Must be what you specfied in MODULE_IDENT
-		return M_DUMMY;
+		// Must be M_PLUGIN
+		return M_PLUGIN;
 	}
 
 	virtual const char *getName() const

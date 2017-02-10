@@ -6,6 +6,8 @@
 
 #include "DummyModule.h"
 
+#include <iostream>
+
 static int w_sayHello(lua_State *L)
 {
 	Dummy::instance.sayHello();
@@ -32,8 +34,8 @@ static const lua_CFunction types[] =
 };
 
 // This is the loader function
-// it's name must be `luaopen_love_plugin_<MODULE_NAME>`
-extern "C" int luaopen_love_plugin_dummy(lua_State *L)
+// it's name must be `luaopen__<MODULE_NAME>` or `loveopen_<MODULE_NAME>
+extern "C" int luaopen_dummy(lua_State *L)
 {
 	WrappedModule w;
 	w.module = &Dummy::instance;
@@ -44,3 +46,5 @@ extern "C" int luaopen_love_plugin_dummy(lua_State *L)
 
 	return luax_register_module(L, w);
 }
+
+

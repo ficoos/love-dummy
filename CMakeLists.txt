@@ -1,10 +1,27 @@
-project ( love-dummy )
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+PROJECT("love-dummy")
+
+SET(LIB_NAME "dummy")
 
 set ( SOURCE_ROOT ${CMAKE_CURRENT_SOURCE_DIR} )
 
-file ( GLOB LOVE_DUMMY_SRC "${SOURCE_ROOT}/*.cpp" )
+add_library(
+	"${LIB_NAME}"
+	STATIC
+	${SOURCE_ROOT}/DummyModule.cpp
+	${SOURCE_ROOT}/DummyModule.h
+	${SOURCE_ROOT}/wrap_Dummy.cpp
+	${SOURCE_ROOT}/wrap_Dummy.h
+)
 
-add_library( love-dummy STATIC ${LOVE_DUMMY_SRC} )
-target_include_directories(love-dummy PUBLIC
+TARGET_INCLUDE_DIRECTORIES(
+	"${LIB_NAME}" PUBLIC
 	${PLUGIN_MODULE_INCLUDE_DIRS}
 )
+
+TARGET_LINK_LIBRARIES(
+	"${LIB_NAME}"
+	${LOVE_LUA_LIBRARY}
+)
+
+SET_TARGET_PROPERTIES("${LIB_NAME}" PROPERTIES PREFIX "")
